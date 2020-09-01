@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Basic AJAX Demo</title>  <!--we are requesting to update this webpage with info located in another webpage-->
+		<link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="main">
+			<h2>Get The Latest Content:</h2>
+			<div class='content' id="content">
+				<input type="button" class="button" value="Get Content" id="btn_content" onclick="getContent();"/>
+			</div>
+        <script type="text/javascript">
+        //step 1: set up the xml http request
+            //new creates a new instance - instructs browser we are dealing with ajax
+        var ajax = new XMLHttpRequest ();
+        //step 2: preprare the open ajax request/statement
+        //using the open method which uses 2 parameters
+        //instruct the server how to handle the data
+        //content.html is the info we ar requesting back from the server
+        ajax.open("GET", "content.html");
+        //step 3: define the ajax response callback method
+        // block or code that instruct the browser of what to do with the data it receives from server
+        //there are several stages the server goes through. We want the last state (4) and we
+        //want to know it was successulf
+        ajax.onreadystatechange = function () {//if here really means when
+            if (ajax.readyState == 4) {
+                document.getElementById("content").innerHTML = ajax.responseText;
+                }
+        }
+        //step 4: send the ajax request for data - create a trigger event like a user button
+        function getContent() {
+            ajax.send();
+            //here we want to hide the button when we are displaying the returned data
+            document.getElementById("btn_content"),style.display = "none";
+        }
+			//now open type in browser the ip address (with the port :8080)/file name
+            //for this example 127.0.0.1:8080/AJAX/ajax_basic.html
+            //that will open XAMPP (kind of a software pretending to be a server). We
+            //use XAMPP-Apache to test the functionality of 
+            // updates we make to current page from data stored in another pages) and load the a
+		</script>
+    </body>
+</html>
